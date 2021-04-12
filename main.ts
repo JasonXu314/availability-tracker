@@ -136,6 +136,10 @@ async function runCheck() {
 		await page.$eval('body', (elem) => {
 			elem.innerHTML = `
 				<div style="height: 100vh; width: 100vw; font-size: 800px; color: red">Hi</div>
+				<audio id="poipoipoi" preload="auto" loop autoplay>
+					<source src="http://dl.dropboxusercontent.com/s/nukvrebhd0rx1up/poipoipoi.mp3" type="audio/mpeg">
+					<source src="http://dl.dropboxusercontent.com/s/0sf9g2ezy9tcyvx/poipoipoi.ogg" type="audio/ogg">
+				</audio>
 			`;
 		});
 
