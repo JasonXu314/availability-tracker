@@ -82,6 +82,8 @@ const urls = [
 	'https://www.nowinstock.net/home/healthhousehold/toiletpaper/'
 ];
 
+let alertOpen: boolean = false;
+
 async function checkPage(url: string, idArray: string[], page: Page): Promise<AvailableResult[]> {
 	await page.goto(url);
 
@@ -121,7 +123,24 @@ async function runCheck() {
 	const pages = await window.pages();
 
 	const results = await Promise.all(pages.map((page, i) => checkPage(urls[i], idArrs[i], page)));
-	console.log([...results[0], ...results[1], ...results[2], ...results[3], ...results[4]]);
+	const flatResults = [...results[0], ...results[1], ...results[2], ...results[3], ...results[4]];
+	console.log(flatResults);
+
+	if (flatResults.length > 0 && !alertOpen) {
+		const alertWindow = await launch({
+			headless: false,
+			args: ['--start-maximized']
+		});
+		const page = (await alertWindow.pages())[0];
+
+		await page.$eval('body', (elem) => {
+			elem.innerHTML = `
+				<div style="height: 100vh; width: 100vw; font-size: 800px; color: red">Hi</div>
+			`;
+		});
+
+		alertOpen = true;
+	}
 
 	await window.close();
 }
