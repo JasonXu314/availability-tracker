@@ -141,6 +141,7 @@ async function runCheck() {
 					<source src="http://dl.dropboxusercontent.com/s/0sf9g2ezy9tcyvx/poipoipoi.ogg" type="audio/ogg">
 				</audio>
 			`;
+			document.querySelector<HTMLAudioElement>('#poipoipoi').volume = 0.5;
 		});
 
 		alertOpen = true;
